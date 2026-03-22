@@ -1,2 +1,2 @@
-# catalognow-shopify-app-docs
+# catalognow-docs
 CatalogNow shopify app store app documentation
