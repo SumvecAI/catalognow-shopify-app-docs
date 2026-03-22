@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CatalogNow Documentation — Sumvec.AI</title>
+  <meta name="description" content="CatalogNow documentation — AI-powered product catalog enrichment for Shopify merchants. By Sumvec.AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #00A5E0;
+      --blue-dark: #0088BD;
+      --orange: #FF8101;
+      --navy: #1E2A3A;
+      --navy-light: #2A3A4E;
+      --gray: #808080;
+      --gray-light: #F7F8FA;
+      --gray-border: #E5E7EB;
+      --white: #FFFFFF;
+      --text: #1E2A3A;
+      --text-secondary: #5A6577;
+      --sidebar-width: 280px;
+      --header-height: 64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .header-logo svg { height: 32px; width: auto; }
+
+    .header-title {
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header-title span {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .header-badge {
+      background: rgba(0,165,224,0.15);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-left: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-link {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .header-link:hover { color: var(--white); }
+
+    /* ─── Layout ─── */
+    .layout {
+      display: flex;
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* ─── Sidebar ─── */
+    .sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: var(--gray-light);
+      border-right: 1px solid var(--gray-border);
+      overflow-y: auto;
+      padding: 24px 0;
+      z-index: 50;
+    }
+
+    .sidebar-section {
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-heading {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      padding: 0 12px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 7px 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .sidebar-link:hover {
+      color: var(--blue);
+      background: rgba(0,165,224,0.08);
+    }
+
+    .sidebar-link.active {
+      color: var(--blue);
+      background: rgba(0,165,224,0.12);
+      font-weight: 600;
+    }
+
+    /* ─── Main Content ─── */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 48px 64px 80px;
+      max-width: 900px;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      margin-bottom: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--gray-border);
+    }
+
+    .hero-product {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--blue), #0088BD);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      box-shadow: 0 4px 12px rgba(0,165,224,0.3);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid var(--gray-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* ─── Content Sections ─── */
+    .section { margin-bottom: 48px; }
+
+    .section > h2 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--navy);
+      margin-bottom: 20px;
+      padding-top: 8px;
+    }
+
+    .section > h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 28px 0 12px;
+    }
+
+    .section p {
+      margin-bottom: 14px;
+      color: var(--text-secondary);
+    }
+
+    .section ul, .section ol {
+      margin: 12px 0 18px 24px;
+      color: var(--text-secondary);
+    }
+
+    .section li { margin-bottom: 6px; }
+
+    .section strong { color: var(--text); }
+
+    /* ─── Cards ─── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 4px 16px rgba(0,165,224,0.1);
+      transform: translateY(-1px);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon.blue { background: rgba(0,165,224,0.1); }
+    .card-icon.orange { background: rgba(255,129,1,0.1); }
+    .card-icon.navy { background: rgba(30,42,58,0.08); }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .card a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .card a:hover { text-decoration: underline; }
+
+    /* ─── Steps ─── */
+    .steps { counter-reset: step; margin: 20px 0; }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-number {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .step-content code {
+      background: rgba(0,165,224,0.08);
+      color: var(--blue-dark);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    /* ─── Feature Table ─── */
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .feature-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--gray-light);
+      border-bottom: 2px solid var(--gray-border);
+    }
+
+    .feature-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-border);
+      color: var(--text-secondary);
+    }
+
+    .feature-table tr:hover td {
+      background: rgba(0,165,224,0.03);
+    }
+
+    /* ─── Info Boxes ─── */
+    .info-box {
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info-box.tip {
+      background: rgba(0,165,224,0.06);
+      border-left: 4px solid var(--blue);
+    }
+
+    .info-box.warning {
+      background: rgba(255,129,1,0.06);
+      border-left: 4px solid var(--orange);
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      margin-left: var(--sidebar-width);
+      padding: 32px 64px;
+      border-top: 1px solid var(--gray-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main, .footer { margin-left: 0; }
+      .main { padding: 32px 24px 64px; }
+      .footer { padding: 24px; }
+      .hero h1 { font-size: 28px; }
+    }
+
+    /* ─── Scrollbar ─── */
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--gray-border); border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="#" class="header-logo">
+    <svg viewBox="0 0 171.21 169.79" height="32">
+      <defs>
+        <linearGradient id="lg" x1="85.61" y1="133.67" x2="85.61" y2="51.02" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#ff8101"/>
+          <stop offset="1" stop-color="#00a5e0"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#lg)" d="M89.69,122.94c-1.28.67-2.68,1.01-4.09,1.01s-2.81-.34-4.09-1.01l-31.51-16.59-21.09,11.1c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-21.09-11.1-31.51,16.59ZM89.69,87.31c-1.28.67-2.68,1.01-4.09,1.01s-2.81-.34-4.09-1.01l-31.51-16.59-21.09,11.1c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-21.09-11.1-31.51,16.59ZM28.93,55.9l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-54.12-28.5c-.8-.42-1.68-.63-2.56-.63s-1.76.21-2.56.63l-54.12,28.5c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85Z"/>
+    </svg>
+    <div>
+      <span class="header-title"><span>CatalogNow</span> Docs</span>
+    </div>
+  </a>
+  <span class="header-badge">by Sumvec.AI</span>
+  <div class="header-right">
+    <a href="https://www.sumvec.ai" class="header-link" target="_blank">Sumvec.AI</a>
+    <a href="https://github.com/SumvecAI/catalognow-shopify-app-docs" class="header-link" target="_blank">GitHub</a>
+    <a href="mailto:connect@sumvec.ai" class="header-link">Support</a>
+  </div>
+</header>
+
+<!-- Layout -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="#getting-started" class="sidebar-link active">Quick Start</a>
+      <a href="#installation" class="sidebar-link">Installation</a>
+      <a href="#first-setup" class="sidebar-link">First-Time Setup</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Features</div>
+      <a href="#ai-enrichment" class="sidebar-link">AI Enrichment</a>
+      <a href="#product-sync" class="sidebar-link">Product Sync</a>
+      <a href="#batch-operations" class="sidebar-link">Batch Operations</a>
+      <a href="#enrichment-queue" class="sidebar-link">Enrichment Queue</a>
+      <a href="#content-audit" class="sidebar-link">Content Audit</a>
+      <a href="#backup-restore" class="sidebar-link">Backup & Restore</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="#ai-actions" class="sidebar-link">AI Actions Reference</a>
+      <a href="#ai-models" class="sidebar-link">AI Models</a>
+      <a href="#faq" class="sidebar-link">FAQ</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Support</div>
+      <a href="#support" class="sidebar-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-product">
+        <svg viewBox="0 0 171.21 169.79" height="16" style="opacity:0.9">
+          <defs><linearGradient id="lg2" x1="85.61" y1="133.67" x2="85.61" y2="51.02" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="rgba(255,255,255,0.6)"/></linearGradient></defs>
+          <path fill="url(#lg2)" d="M89.69,122.94c-1.28.67-2.68,1.01-4.09,1.01s-2.81-.34-4.09-1.01l-31.51-16.59-21.09,11.1c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-21.09-11.1-31.51,16.59ZM89.69,87.31c-1.28.67-2.68,1.01-4.09,1.01s-2.81-.34-4.09-1.01l-31.51-16.59-21.09,11.1c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-21.09-11.1-31.51,16.59ZM28.93,55.9l54.12,28.5c1.6.84,3.51.84,5.11,0l54.12-28.5c1.83-.97,2.93-2.78,2.93-4.85s-1.09-3.89-2.93-4.85l-54.12-28.5c-.8-.42-1.68-.63-2.56-.63s-1.76.21-2.56.63l-54.12,28.5c-1.83.97-2.93,2.78-2.93,4.85s1.09,3.89,2.93,4.85Z"/>
+        </svg>
+        SageAI CatalogNow
+      </div>
+      <h1>CatalogNow Documentation</h1>
+      <p>AI-powered product catalog enrichment for Shopify. Generate descriptions, SEO content, categories, and tags — all from your Shopify admin.</p>
+      <div class="hero-actions">
+        <a href="#first-setup" class="btn btn-primary">Get Started</a>
+        <a href="https://github.com/SumvecAI/catalognow-shopify-app-docs" class="btn btn-secondary" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Start Cards -->
+    <div class="section" id="getting-started">
+      <h2>Getting Started</h2>
+      <p>CatalogNow enriches your Shopify product catalog using AI. It generates compelling descriptions, optimizes SEO metadata, categorizes products, and extracts attributes from images.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon blue">1</div>
+          <h3>Install & Configure</h3>
+          <p>Install from the Shopify App Store, add your free OpenRouter API key in Settings.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">2</div>
+          <h3>Sync Products</h3>
+          <p>Import your Shopify catalog with one click. Products sync with all variants and metafields.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon orange">3</div>
+          <h3>Run AI Enrichment</h3>
+          <p>Click any product to enrich it, or use Batch Operations for bulk processing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon orange">4</div>
+          <h3>Review & Publish</h3>
+          <p>Accept, edit, or reject AI suggestions in the Enrichment Queue before they go live.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation -->
+    <div class="section" id="installation">
+      <h2>Installation</h2>
+      <ol>
+        <li>Install CatalogNow from the Shopify App Store</li>
+        <li>The app will request permission to read and write your products</li>
+        <li>Once installed, CatalogNow appears in your Shopify admin sidebar</li>
+      </ol>
+    </div>
+
+    <!-- First-Time Setup -->
+    <div class="section" id="first-setup">
+      <h2>First-Time Setup</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Get an OpenRouter API Key</h3>
+            <p>Go to <a href="https://openrouter.ai" target="_blank">openrouter.ai</a>, create a free account, click "Keys" in the sidebar, then "Create Key". Copy the key (starts with <code>sk-or-</code>). <strong>Free models are available immediately</strong> — no credit card required.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Add Your Key to CatalogNow</h3>
+            <p>In CatalogNow, go to <strong>Settings</strong>, paste your OpenRouter API key, click <strong>Validate Key</strong> to test it, then <strong>Save Key</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Sync Your Products</h3>
+            <p>Go to <strong>Products</strong> and click <strong>Sync from Shopify</strong>. Your products will be imported with all variants, images, and metafields.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Start Enriching</h3>
+            <p>Click on any product to open the AI workspace. Use the AI panel to generate descriptions, categorize, or run full enrichment. Review suggestions in the <strong>Enrichment Queue</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Enrichment -->
+    <div class="section" id="ai-enrichment">
+      <h2>AI Enrichment</h2>
+      <p>CatalogNow uses specialized AI agents for different enrichment tasks. Results are powered by OpenRouter, routing to free or paid LLM models depending on your configuration.</p>
+
+      <h3>Single Product Enrichment</h3>
+      <ol>
+        <li>Go to <strong>Products</strong> and click a product</li>
+        <li>In the <strong>AI Enrichment</strong> panel (right side), click an action button</li>
+        <li>Wait for the AI to process (may take 10-60 seconds)</li>
+        <li>Results auto-populate the form fields and appear as <strong>Pending Suggestions</strong></li>
+      </ol>
+
+      <div class="info-box tip">
+        <strong>Tip: Use Full AI Enrichment</strong>
+        For first-time enrichment, "Full AI Enrichment" is recommended — it runs categorization, SEO, description generation, and vision analysis in sequence.
+      </div>
+
+      <h3>Reviewing Suggestions</h3>
+      <p>AI suggestions appear in the <strong>Pending Suggestions</strong> section on each product page. For each suggestion you can:</p>
+      <ul>
+        <li><strong>Accept</strong> — applies the suggestion, creates a version snapshot, syncs to Shopify</li>
+        <li><strong>Edit & Accept</strong> — modify the suggestion before accepting it</li>
+        <li><strong>Dismiss</strong> — rejects the suggestion without applying it</li>
+      </ul>
+    </div>
+
+    <!-- Product Sync -->
+    <div class="section" id="product-sync">
+      <h2>Product Sync</h2>
+      <p>CatalogNow syncs your products from Shopify, storing them locally for fast AI processing. The sync includes:</p>
+      <ul>
+        <li>Product title, description (HTML), vendor, product type</li>
+        <li>All images with URLs and alt text</li>
+        <li>Variants with SKU, price, compare-at price, and inventory</li>
+        <li>Metafields (custom fields) with resolved display names</li>
+        <li>SEO title and description</li>
+      </ul>
+      <p>Products are synced in pages of 50. After accepting AI suggestions, changes are automatically synced back to Shopify.</p>
+    </div>
+
+    <!-- Batch Operations -->
+    <div class="section" id="batch-operations">
+      <h2>Batch Operations</h2>
+      <p>Process multiple products at once for efficient catalog enrichment.</p>
+      <ol>
+        <li>Go to <strong>Batch Operations</strong></li>
+        <li>Select products using the checkboxes (or "Select All")</li>
+        <li>Choose an action: Full AI Enrichment, Auto-Categorize, or Generate Descriptions</li>
+        <li>Click <strong>Run</strong></li>
+      </ol>
+      <div class="info-box warning">
+        <strong>Automatic Backup</strong>
+        A backup is automatically created before every batch operation. You can restore from backups in Settings.
+      </div>
+    </div>
+
+    <!-- Enrichment Queue -->
+    <div class="section" id="enrichment-queue">
+      <h2>Enrichment Queue</h2>
+      <p>The Enrichment Queue is your central hub for reviewing all AI suggestions across your entire catalog.</p>
+      <ul>
+        <li><strong>Accept</strong> — applies the suggestion to the product and syncs to Shopify</li>
+        <li><strong>Edit & Accept</strong> — opens an editor to modify the suggestion before accepting</li>
+        <li><strong>Reject</strong> — dismisses the suggestion</li>
+        <li><strong>Accept All</strong> — applies all pending suggestions at once (backup created automatically)</li>
+      </ul>
+      <p>Each card shows the product name, affected field, agent used, current value, and the AI suggestion.</p>
+    </div>
+
+    <!-- Content Audit -->
+    <div class="section" id="content-audit">
+      <h2>Content Audit</h2>
+      <p>The Content Audit page gives you a comprehensive view of your catalog's quality across three dimensions:</p>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>What It Measures</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SEO Score</strong></td>
+            <td>Title optimization, SEO title, meta description, category taxonomy</td>
+            <td>35%</td>
+          </tr>
+          <tr>
+            <td><strong>CRO Score</strong></td>
+            <td>Product images, description quality, pricing strategy, key attributes</td>
+            <td>35%</td>
+          </tr>
+          <tr>
+            <td><strong>Completeness</strong></td>
+            <td>12 fields: title, description, images, SEO, tags, category, and more</td>
+            <td>30%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Products are sorted by lowest score first, so you can focus on the ones that need the most attention.</p>
+    </div>
+
+    <!-- Backup & Restore -->
+    <div class="section" id="backup-restore">
+      <h2>Backup & Restore</h2>
+      <p>CatalogNow protects your data with automatic version history and backups.</p>
+
+      <h3>Version History</h3>
+      <p>Every product change creates a version snapshot. View the history on any product page and click <strong>Restore</strong> to roll back to a previous version. Changes are synced to Shopify automatically.</p>
+
+      <h3>Automatic Backups</h3>
+      <p>Backups are created automatically before batch operations and bulk accepts. You can manage backups in <strong>Settings &gt; Backup</strong>.</p>
+    </div>
+
+    <!-- AI Actions Reference -->
+    <div class="section" id="ai-actions">
+      <h2>AI Actions Reference</h2>
+
+      <table class="feature-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Input</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Generate Description</strong></td>
+            <td>Title, existing description, category</td>
+            <td>HTML product description</td>
+          </tr>
+          <tr>
+            <td><strong>Generate SEO Content</strong></td>
+            <td>Title, description, category</td>
+            <td>SEO title (50-60 chars), meta description, keywords</td>
+          </tr>
+          <tr>
+            <td><strong>Analyze Image</strong></td>
+            <td>Product image URL</td>
+            <td>Colors, materials, style, category suggestions</td>
+          </tr>
+          <tr>
+            <td><strong>Auto-Categorize</strong></td>
+            <td>Title, description</td>
+            <td>Category path, confidence score, up to 10 tags</td>
+          </tr>
+          <tr>
+            <td><strong>Full AI Enrichment</strong></td>
+            <td>All product data</td>
+            <td>Combined: category, tags, SEO, description, vision</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- AI Models -->
+    <div class="section" id="ai-models">
+      <h2>AI Models</h2>
+      <p>CatalogNow uses <a href="https://openrouter.ai" target="_blank">OpenRouter</a> to access AI models:</p>
+      <ul>
+        <li><strong>Free models</strong> (NVIDIA Nemotron, StepFun) — work immediately with no credits or credit card</li>
+        <li><strong>Paid models</strong> (Claude, GPT-4) — require OpenRouter credits</li>
+        <li>Configure your preferred model in <strong>Settings</strong></li>
+        <li>Each store uses its own API key, encrypted at rest with AES-256-GCM</li>
+      </ul>
+      <p>The default model pool uses automatic fallback — if the first model fails or is rate-limited, the next model is tried automatically.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>What are free models?</h3>
+      <p>OpenRouter offers free-tier AI models that work with CatalogNow at no cost. Select a free model in Settings to get started without a credit card.</p>
+
+      <h3>How do I roll back a change?</h3>
+      <p>Every product has a Version History section. Click "Restore" on any previous version to revert the product to that state. The change is synced to Shopify automatically.</p>
+
+      <h3>What does "Sync Status" mean?</h3>
+      <p><strong>SYNCED</strong> means the product data matches Shopify. <strong>DIRTY</strong> means local changes haven't been pushed yet — they'll sync when you accept a suggestion or save changes.</p>
+
+      <h3>Is my data safe?</h3>
+      <p>CatalogNow creates automatic backups before batch operations and stores version history for every product change. Your API key is encrypted at rest with AES-256-GCM.</p>
+
+      <h3>How much does it cost?</h3>
+      <p>CatalogNow is free to use. The only cost is AI model usage through OpenRouter, and free models are available. Each store brings its own API key.</p>
+    </div>
+
+    <!-- Support -->
+    <div class="section" id="support">
+      <h2>Support</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A5E0" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email</h3>
+          <p>Reach our team directly for support or feedback.</p>
+          <a href="mailto:connect@sumvec.ai">connect@sumvec.ai</a>
+        </div>
+        <div class="card">
+          <div class="card-icon navy">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="#1E2A3A"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </div>
+          <h3>GitHub</h3>
+          <p>Report bugs or request features on our GitHub repository.</p>
+          <a href="https://github.com/SumvecAI/catalognow-shopify-app-docs/issues" target="_blank">Open an Issue</a>
+        </div>
+        <div class="card">
+          <div class="card-icon orange">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF8101" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Website</h3>
+          <p>Learn more about Sumvec.AI and our AI products.</p>
+          <a href="https://www.sumvec.ai" target="_blank">sumvec.ai</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <span>&copy; 2025 Sumvec.AI &mdash; Turning AI ambition into Enterprise Action</span>
+  <a href="https://www.sumvec.ai" target="_blank">sumvec.ai</a>
+</footer>
+
+<!-- Active sidebar link tracking -->
+<script>
+  const links = document.querySelectorAll('.sidebar-link');
+  const sections = [];
+  links.forEach(link => {
+    const id = link.getAttribute('href')?.replace('#', '');
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) sections.push({ el, link });
+    }
+  });
+
+  function updateActive() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 120) current = s;
+    }
+    links.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+</script>
+
+</body>
+</html>
